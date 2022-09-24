@@ -12,6 +12,11 @@ const bulbURL = '/img/ledbulbs-sheet.png'
 let bulbImage = new Image();
 bulbImage.src = bulbURL;
 
+//keyboard event listeners
+window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, false);
+window.addEventListener('keyup', function(event) { Key.onKeyup(event); }, false);
+
+
 
 atlasImage.onload = function(){ 
     console.log('atlas image loaded');
@@ -69,7 +74,25 @@ function tick() {
     r.text([text, x-128, y, 1, 1, "top", "left", 1, 2, 0, 0, 0]);
     
     r.strokePolygon(w/2, h/2, 20, 7, textbanner.x, 1);
+
+    //player movement
+    if (Key.isDown(Key.LEFT)) {
+        player.x--;
+    }
+    if (Key.isDown(Key.RIGHT)) {
+        player.x++;
+    }
+    if (Key.isDown(Key.UP)) {
+        player.y--;
+    }
+    if (Key.isDown(Key.DOWN)) {
+        player.y++;
+    }
+    //draw player    
+    r.rect(player.x, player.y, 2, 2, 1);
+
     renderBulbs();
+    Key.update();
     requestAnimationFrame(tick);
 }
 
