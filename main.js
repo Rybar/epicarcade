@@ -4,11 +4,11 @@ import { Key } from "./js/utils.js";
 const w = 128;
 const h = 72;
 
-const atlasURL = '/img/palette-bigger.webp';
+const atlasURL = './img/palette-bigger.webp';
 let atlasImage = new Image();
 atlasImage.src = atlasURL;
 
-const bulbURL = '/img/ledbulbs-sheet.png'
+const bulbURL = './img/ledbulbs-sheet.png'
 let bulbImage = new Image();
 bulbImage.src = bulbURL;
 
