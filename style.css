@@ -5,6 +5,7 @@
 }
 body {
     background: #111;
+    overflow: hidden;
 }
 
 canvas {

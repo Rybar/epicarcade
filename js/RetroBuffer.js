@@ -57,7 +57,7 @@ class RetroBuffer {
       57, 58, 59, 60, 61, 62, 63, 64,
     ];
 
-    this.DTH = [
+    this.dither = [
       0b1111111111111111, 0b1111111111110111, 0b1111110111110111,
       0b1111110111110101, 0b1111010111110101, 0b1111010110110101,
       0b1110010110110101, 0b1110010110100101, 0b1010010110100101,
@@ -392,7 +392,7 @@ class RetroBuffer {
   ) {
     var xratio = sw / dw;
     var yratio = sh / dh;
-    this.pat = this.DTH[0]; //reset pattern
+    this.pat = this.dither[0]; //reset pattern
     for (var i = 0; i < dh; i++) {
       for (var j = 0; j < dw; j++) {
         px = (j * xratio) | 0;
