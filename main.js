@@ -51,6 +51,8 @@ function init() {
     //these functions create pallettes with different subpixel geometries, 1 per row
     createBulbPaletteVerticalBars();
     createBulbPaletteHorizontalBars(11)
+    createBulbPalettePenTile1(22);
+    createBulbPalettePenTile2(33);
     document.body.append(bulbCanvas);
     bulbCanvas.style.imageRendering = 'pixelated';
     bulbCanvas.style.width = '100%';
@@ -140,8 +142,8 @@ function bulbTypeFill() {
     r.renderTarget = r.PAGE_1; 
     //dither 8 is checkerboard dither, we're filling 0 and 1.
     //renderbulbs will draw the correct bulb type for each pixel based on this value
-    r.pat = r.dither[8];
-    r.fillRect(0, 0, w, h, 1);
+    r.pat = r.dither[0];
+    r.fillRect(0, 0, w, h, 3);
     r.pat = r.dither[0];
     r.renderTarget = r.SCREEN;
 }
@@ -203,6 +205,68 @@ function createBulbPaletteHorizontalBars(rowOffset=0) {
         bulbContext.fillRect(i*11+1, rowOffset+4, 10, 3);
         bulbContext.fillStyle = blue;
         bulbContext.fillRect(i*11+1, rowOffset+7, 10, 3);
+;
+    }
+}
+function createBulbPalettePenTile1(rowOffset=22) {
+   
+    for (let i = 0; i < 64; i++) {
+        //r.colors is a Uint32Array of the palette colors
+        //r.colors[i] includex alpha 0xAABBGGRR
+        //we need to remove the alpha and convert to hex 0xRRGGBB
+        let color = r.colors[i];
+        let hex = color.toString(16);
+        let R = hex.slice(6,8);
+        let G = hex.slice(4,6);
+        let B = hex.slice(2,4);
+        let hexColor = '#' + R + G + B;
+        let red = `#${R}0000`;
+        let green = `#00${G}00`;
+        let blue = `#0000${B}`;
+
+        bulbContext.fillStyle = red;
+        bulbContext.fillRect(i*11+1, rowOffset+1, 3, 3);
+        bulbContext.fillRect(i*11+4, rowOffset+4, 3, 3);
+        bulbContext.fillRect(i*11+7, rowOffset+7, 3, 3);
+        bulbContext.fillStyle = green;
+        bulbContext.fillRect(i*11+1, rowOffset+4, 3, 3);
+        bulbContext.fillRect(i*11+4, rowOffset+7, 3, 3);
+        bulbContext.fillRect(i*11+7, rowOffset+1, 3, 3);
+        bulbContext.fillStyle = blue;
+        bulbContext.fillRect(i*11+1, rowOffset+7, 3, 3);
+        bulbContext.fillRect(i*11+4, rowOffset+1, 3, 3);
+        bulbContext.fillRect(i*11+7, rowOffset+4, 3, 3);
+;
+    }
+}
+function createBulbPalettePenTile2(rowOffset=33) {
+   
+    for (let i = 0; i < 64; i++) {
+        //r.colors is a Uint32Array of the palette colors
+        //r.colors[i] includex alpha 0xAABBGGRR
+        //we need to remove the alpha and convert to hex 0xRRGGBB
+        let color = r.colors[i];
+        let hex = color.toString(16);
+        let R = hex.slice(6,8);
+        let G = hex.slice(4,6);
+        let B = hex.slice(2,4);
+        let hexColor = '#' + R + G + B;
+        let red = `#${R}0000`;
+        let green = `#00${G}00`;
+        let blue = `#0000${B}`;
+
+        bulbContext.fillStyle = green;
+        bulbContext.fillRect(i*11+1, rowOffset+1, 3, 3);
+        bulbContext.fillRect(i*11+4, rowOffset+4, 3, 3);
+        bulbContext.fillRect(i*11+7, rowOffset+7, 3, 3);
+        bulbContext.fillStyle = red;
+        bulbContext.fillRect(i*11+4, rowOffset+1, 3, 3);
+        bulbContext.fillRect(i*11+7, rowOffset+1, 3, 3);
+        bulbContext.fillRect(i*11+7, rowOffset+4, 3, 3);
+        bulbContext.fillStyle = blue;
+        bulbContext.fillRect(i*11+1, rowOffset+4, 3, 3);
+        bulbContext.fillRect(i*11+1, rowOffset+7, 3, 3);
+        bulbContext.fillRect(i*11+4, rowOffset+7, 3, 3);
 ;
     }
 }
